@@ -1,0 +1,16 @@
+endpoint:
+  port: 8080
+  timeoutMs: 2000
+logTypes:
+  type1:
+    locations:
+      - URL: file:///data/log/type1
+    maxQueueSize: 2048
+    queueFlashCount: 1024
+    flushFrequencyInMs: 500
+  type2:
+    locations:
+      - URL: file:///data/log/type2
+    maxQueueSize: 4096
+    queueFlashCount: 2048
+    flushFrequencyInMs: 1000
