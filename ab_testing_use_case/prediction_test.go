@@ -37,8 +37,6 @@ func TestService_Predict(t *testing.T) {
 }`,
 		})
 
-
-
 	var service = New()
 	for _, useCase := range useCases {
 		response := service.Predict(useCase.request)
