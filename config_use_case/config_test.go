@@ -5,6 +5,7 @@ import (
 	"github.com/viant/toolbox"
 	"path"
 	"github.com/stretchr/testify/assert"
+	"github.com/viant/assertly"
 )
 
 func TestNewConfigFromURL(t *testing.T) {
@@ -97,5 +98,61 @@ func TestNewConfigFromURL(t *testing.T) {
 			continue
 		}
 		assert.Equal(t, useCase.expected, config, useCase.description)
+	}
+}
+
+
+func TestNewConfigFromURL_v2(t *testing.T) {
+	type usecase struct {
+		description string
+		configURL   string
+		expected    interface{}
+		hasError    bool
+	}
+	var useCases []*usecase
+
+	var parentDirectory = toolbox.CallerDirectory(3)
+	useCases = append([]*usecase(nil),
+		&usecase{
+			description: "loading config from json",
+			configURL:   path.Join(parentDirectory, "test", "config.json"),
+			expected: `{
+	  "Endpoint": {
+		"Port": 8080,
+		"TimeoutMs": 2000
+	  },
+	  "LogTypes": {
+		"type1": {
+		  "Locations":[
+			{
+			  "URL":"~/type1/"
+			}
+		  ],
+		  "MaxQueueSize": 2048,
+		  "QueueFlashCount": 1024,
+		  "FlushFrequencyInMs": 500
+		},
+		"type2": "@exists@" 
+	  }
+	}`,
+		},
+
+
+		)
+
+
+
+
+	for _, useCase := range useCases {
+		config, err := NewConfigFromURL(useCase.configURL)
+		if useCase.hasError {
+			if assert.NotNil(t, err, useCase.description) {
+				continue
+			}
+		}
+		if ! assert.Nil(t, err, useCase.description) {
+			continue
+		}
+		assertly.AssertValues(t, useCase.expected, config, useCase.description)
 	}
 }
