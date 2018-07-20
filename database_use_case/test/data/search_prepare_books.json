@@ -1,0 +1,7 @@
+[
+  {},
+  { "id":1, "isbn":"978-3-16-148410-0", "title":"title 1", "author_id":1},
+  { "id":2,  "isbn":"978-3-16-148410-1", "title":"title 2", "author_id":1},
+  { "id":3,  "isbn":"978-3-16-148410-2",  "title":"title 3", "author_id":2}
+]
+

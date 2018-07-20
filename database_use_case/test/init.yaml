@@ -1,0 +1,13 @@
+datastore: library
+recreate: true
+config:
+  driverName: sqlite3
+  descriptor: [url]
+  parameters:
+    dbname: library
+    url: "./test/db/library.db"
+  datastore: library
+scripts:
+  - URL: test/ddl/schema.sql
+
+
