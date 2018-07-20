@@ -93,7 +93,7 @@ func Test_searchTestSetup(t *testing.T) {
 	if !searchTestSetup(t) {
 		return
 	}
-	
+
 	db, err := getDbManagerForURL("test/config.yaml")
 	if ! assert.Nil(t, err) {
 		return
